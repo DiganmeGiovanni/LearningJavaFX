@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -10,91 +11,83 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="311.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8.0.66" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-         <padding>
-            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
-         </padding>
-         <children>
-            <Label text="What do you want to buy today?">
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-         </children>
-      </HBox>
-      <GridPane>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="511.0"
+      prefWidth="450.0" xmlns="http://javafx.com/javafx/8.0.66" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="main.java.me.learning.javafx.shoppinglist.ShoppingListController">
+    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+        <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0"/>
+        </padding>
+        <Label text="What do you want to buy today?">
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+            </padding>
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Label>
+    </HBox>
+    <GridPane>
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
         </rowConstraints>
-         <children>
-            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Label text="Potatoes" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-               <children>
-                  <Label text="Oranges" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="40.0" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
-               <children>
-                  <Label text="Apples" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
-               <children>
-                  <Label text="0" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" layoutX="210.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <children>
-                  <Label text="0" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" layoutX="210.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <children>
-                  <Label text="0" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" layoutX="210.0" layoutY="70.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-               <children>
-                  <Label text="0" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="2">
-               <children>
-                  <Button mnemonicParsing="false" text="-" />
-                  <Button mnemonicParsing="false" text="+" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" layoutX="410.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-               <children>
-                  <Button mnemonicParsing="false" text="-" />
-                  <Button mnemonicParsing="false" text="+" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" layoutX="410.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
-               <children>
-                  <Button mnemonicParsing="false" text="-" />
-                  <Button mnemonicParsing="false" text="+" />
-               </children>
-            </HBox>
-         </children>
-      </GridPane>
-   </children>
+        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+            <Label text="Potatoes"/>
+        </HBox>
+        <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0"
+              GridPane.rowIndex="1">
+            <Label text="Oranges"/>
+        </HBox>
+        <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="40.0" prefHeight="100.0" prefWidth="200.0"
+              GridPane.rowIndex="2">
+            <Label text="Apples"/>
+        </HBox>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+            <Label fx:id="labelAmountPotatoes" text="0"/>
+        </HBox>
+        <HBox alignment="CENTER" layoutX="210.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0"
+              GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label fx:id="labelAmountOranges" text="0"/>
+        </HBox>
+        <HBox alignment="CENTER" layoutX="210.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0"
+              GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label fx:id="labelAmountApples" text="0"/>
+        </HBox>
+        <HBox alignment="CENTER" layoutX="210.0" layoutY="70.0" prefHeight="100.0" prefWidth="200.0"
+              GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Label fx:id="labelAmountTotal" text="0"/>
+        </HBox>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="2">
+            <Button mnemonicParsing="false" onAction="#subtractPotato" text="-"/>
+            <Button mnemonicParsing="false" onAction="#addPotato" text="+"/>
+        </HBox>
+        <HBox alignment="CENTER" layoutX="410.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" spacing="5.0"
+              GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Button mnemonicParsing="false" onAction="#subtractOrange" text="-"/>
+            <Button mnemonicParsing="false" onAction="#addOrange" text="+"/>
+        </HBox>
+        <HBox alignment="CENTER" layoutX="410.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" spacing="5.0"
+              GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <Button mnemonicParsing="false" onAction="#subtractApple" text="-"/>
+            <Button mnemonicParsing="false" onAction="#addApple" text="+"/>
+        </HBox>
+    </GridPane>
+    <HBox alignment="TOP_CENTER" prefHeight="295.0" prefWidth="450.0">
+        <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+        </padding>
+        <PieChart fx:id="shoppingPieChart" prefHeight="235.0" prefWidth="430.0" title="Shopping Stats">
+            <HBox.margin>
+                <Insets top="20.0"/>
+            </HBox.margin>
+        </PieChart>
+    </HBox>
 </VBox>
