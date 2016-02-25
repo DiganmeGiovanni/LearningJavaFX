@@ -3,8 +3,6 @@ package me.learning.javafx.contacts.view;
 import com.dooapp.fxform.FXForm;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -17,6 +15,7 @@ import me.learning.javafx.contacts.util.Utilities;
 import java.util.Optional;
 
 /**
+ *
  * Created by giovanni on 2/24/16.
  */
 public class PersonOverviewController {
@@ -71,7 +70,18 @@ public class PersonOverviewController {
      */
     @FXML
     private void handleEdit() {
+        int selectedIndex = tablePersons.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            this.showPersonEditDialog(tablePersons.getItems().get(selectedIndex));
+        }
+        else {
+            Alert nothingSelectedAlert = new Alert(Alert.AlertType.ERROR);
+            nothingSelectedAlert.setTitle("No selection");
+            nothingSelectedAlert.setHeaderText("No person selected");
+            nothingSelectedAlert.setContentText("You must select a person from the table to edit");
 
+            nothingSelectedAlert.showAndWait();
+        }
     }
 
     /**
@@ -79,48 +89,9 @@ public class PersonOverviewController {
      */
     @FXML
     private void handleNew() {
-        // Constructs form
         Person person = new Person();
-        FXForm personForm = new FXForm(person);
-        person.customizeLabels(personForm);
 
-        // Constructs dialog for the form
-        Dialog dialog = new Dialog();
-        dialog.setTitle("Add Person");
-        dialog.setHeaderText("Creates a new Person");
-
-        // Set the button types
-        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-        Node okButton = dialog.getDialogPane().lookupButton(ButtonType.OK);
-        okButton.setDisable(true);
-
-        // Enable ok buttons only when person is valid
-        ObjectProperty<Person> objectProperty = new SimpleObjectProperty<>(person);
-        objectProperty.addListener((observable, oldValue, newValue) -> {
-            System.out.println("Object changing");
-            okButton.setDisable(!newValue.isValid());
-        });
-
-
-        // Constructs form container
-        HBox formContainer = new HBox(10);
-        formContainer.setPadding(new Insets(25, 75, 25, 75));
-        formContainer.getChildren().add(personForm);
-
-        // Set content to dialog
-        dialog.getDialogPane().setContent(formContainer);
-
-        // Configure the results converter
-        dialog.setResultConverter(dialogButton -> {
-            if (dialogButton == ButtonType.OK) {
-                return true;
-            }
-
-            return false;
-        });
-
-        // Display and wait for result
-        Optional result = dialog.showAndWait();
+        Optional result = this.showPersonEditDialog(person);
         result.ifPresent(accepted -> {
             if (accepted.equals(true)) {
                 tablePersons.getItems().add(person);
@@ -174,6 +145,57 @@ public class PersonOverviewController {
             labelCity.setText("");
             labelBirthday.setText("");
         }
+    }
+
+    /**
+     * Constructs a form to edit the details of given person object
+     *
+     * @param person
+     * @return The optional result from dialog
+     */
+    private Optional showPersonEditDialog(Person person) {
+
+        // Constructs form
+        FXForm personForm = new FXForm(person);
+        person.customizeLabels(personForm);
+
+        // Constructs dialog for the form
+        Dialog dialog = new Dialog();
+        dialog.setTitle("Edit Person");
+        dialog.setHeaderText("Edit Person details");
+
+        // Set the button types
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        Node okButton = dialog.getDialogPane().lookupButton(ButtonType.OK);
+        okButton.setDisable(true);
+
+        // Enable ok buttons only when person is valid
+        ObjectProperty<Person> objectProperty = new SimpleObjectProperty<>(person);
+        objectProperty.addListener((observable, oldValue, newValue) -> {
+            System.out.println("Object changing");
+            okButton.setDisable(!newValue.isValid());
+        });
+
+
+        // Constructs form container
+        HBox formContainer = new HBox(10);
+        formContainer.setPadding(new Insets(25, 75, 25, 75));
+        formContainer.getChildren().add(personForm);
+
+        // Set content to dialog
+        dialog.getDialogPane().setContent(formContainer);
+
+        // Configure the results converter
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == ButtonType.OK) {
+                return true;
+            }
+
+            return false;
+        });
+
+        // Display and wait for result
+        return dialog.showAndWait();
     }
 
 
