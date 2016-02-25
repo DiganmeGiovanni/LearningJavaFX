@@ -12,11 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-            minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0"
-            fx:controller="me.learning.javafx.contacts.view.PersonOverviewController"
-            xmlns="http://javafx.com/javafx/8.0.66"
-            xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.66" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.learning.javafx.contacts.view.PersonOverviewController">
    <children>
       <SplitPane dividerPositions="0.29797979797979796" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -35,11 +31,11 @@
                </children>
             </AnchorPane>
 
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="background">
                <children>
 
-                  <Label text="Person Details" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
-                  <GridPane AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="30.0">
+                  <Label styleClass="label-header" text="Person Details" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                  <GridPane AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="85.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -54,23 +50,23 @@
                     </rowConstraints>
                      <children>
                         <Label text="First Name" />
-                        <Label text="Last Name"   GridPane.rowIndex="1" />
-                        <Label text="Street"      GridPane.rowIndex="2" />
-                        <Label text="City"        GridPane.rowIndex="3" />
+                        <Label text="Last Name" GridPane.rowIndex="1" />
+                        <Label text="Street" GridPane.rowIndex="2" />
+                        <Label text="City" GridPane.rowIndex="3" />
                         <Label text="Postal Code" GridPane.rowIndex="4" />
-                        <Label text="Birthday"    GridPane.rowIndex="5" />
-                        <Label text="Label" fx:id="labelFirstName"  GridPane.columnIndex="1" />
-                        <Label text="Label" fx:id="labelLastName"   GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label text="Label" fx:id="labelStreet"     GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label text="Label" fx:id="labelCity"       GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label text="Label" fx:id="labelPostalCode" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label text="Label" fx:id="labelBirthday"   GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label text="Birthday" GridPane.rowIndex="5" />
+                        <Label fx:id="labelFirstName" styleClass="label-bright" text="Label" GridPane.columnIndex="1" />
+                        <Label fx:id="labelLastName" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="labelStreet" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="labelCity" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label fx:id="labelPostalCode" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label fx:id="labelBirthday" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                      </children>
                   </GridPane>
                    <HBox alignment="CENTER_RIGHT" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                        <children>
-                           <Button mnemonicParsing="false" onAction="#handleNew"    text="New" />
-                           <Button mnemonicParsing="false" onAction="#handleEdit"   text="Edit" />
+                           <Button mnemonicParsing="false" onAction="#handleNew" text="New" />
+                           <Button mnemonicParsing="false" onAction="#handleEdit" text="Edit" />
                            <Button mnemonicParsing="false" onAction="#handleDelete" text="Delete" />
                        </children>
                        <padding>
