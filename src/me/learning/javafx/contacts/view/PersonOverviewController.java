@@ -170,10 +170,11 @@ public class PersonOverviewController {
         okButton.setDisable(true);
 
         // Enable ok buttons only when person is valid
-        ObjectProperty<Person> objectProperty = new SimpleObjectProperty<>(person);
-        objectProperty.addListener((observable, oldValue, newValue) -> {
-            System.out.println("Object changing");
-            okButton.setDisable(!newValue.isValid());
+        person.firstNameProperty().addListener((observable1, oldValue1, newValue1) -> {
+            okButton.setDisable(!person.isValid());
+        });
+        person.lastNameProperty().addListener((observable1, oldValue1, newValue1) -> {
+            okButton.setDisable(!person.isValid());
         });
 
 

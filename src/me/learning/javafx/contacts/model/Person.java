@@ -3,17 +3,18 @@ package me.learning.javafx.contacts.model;
 import com.dooapp.fxform.FXForm;
 import javafx.beans.property.*;
 import javafx.scene.control.Label;
+import me.learning.javafx.contacts.util.LocalDateAdapter;
 import me.learning.javafx.contacts.util.Utilities;
 
 import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
 import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 import java.util.Set;
 
 /**
+ *
  * Created by giovanni on 2/24/16.
  */
 public class Person {
@@ -154,6 +155,7 @@ public class Person {
         return city;
     }
 
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getBirthday() {
         return birthday.get();
     }

@@ -5,14 +5,25 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import me.learning.javafx.contacts.model.Person;
+import me.learning.javafx.contacts.util.PersonListWrapper;
+import me.learning.javafx.contacts.view.BirthdayStatisticsController;
 import me.learning.javafx.contacts.view.PersonOverviewController;
+import me.learning.javafx.contacts.view.RootLayoutController;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import java.io.File;
 import java.io.IOException;
+import java.util.prefs.Preferences;
 
 /**
  * Created by giovanni on 2/24/16.
@@ -42,14 +53,16 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Contacts App");
-        this.primaryStage.getIcons().add(new Image("file:resources/img/ic_contacts_flat.png"));
+        this.primaryStage.getIcons().add(new Image("file:resources/img/ic_flat_contacts.png"));
 
         initRootLayout();
         showPersonOverview();
+
+        this.loadsPersonsFromXMLFile(this.getPersonsFilePath());
     }
 
     /**
-     * Initialize the root layour
+     * Initialize the root layout
      */
     private void initRootLayout() {
         try {
@@ -61,6 +74,10 @@ public class MainApp extends Application {
             // Show scene containing the root layout
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
+
+            RootLayoutController rootLayoutController = loader.getController();
+            rootLayoutController.setMainApp(this);
+
             primaryStage.show();
         }
         catch(IOException e) {
@@ -89,6 +106,108 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
 
+    }
+
+    /**
+     * Returns the persons file preference, the preference
+     * if read from OS registry.
+     * @return
+     */
+    public File getPersonsFilePath() {
+        Preferences preferences = Preferences.userNodeForPackage(MainApp.class);
+        String filePath = preferences.get("filePath", null);
+        return (filePath != null) ? new File(filePath) : null;
+    }
+
+    /**
+     * Sets the file path to the currently loaded xml file.
+     * The path is persisted to the OS registry
+     */
+    public void savePersonsFilePath(File file) {
+        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
+        if (file != null) {
+            prefs.put("filePath", file.getPath());
+
+            // Updates the title of stage
+            primaryStage.setTitle("Contacts App - " + file.getName());
+        }
+        else {
+            prefs.remove("filePath");
+
+            // Update the title of stage
+            primaryStage.setTitle("Contacts App");
+        }
+    }
+
+    public void loadsPersonsFromXMLFile(File file) {
+        try {
+            JAXBContext context = JAXBContext.newInstance(PersonListWrapper.class);
+            Unmarshaller um = context.createUnmarshaller();
+
+            PersonListWrapper wrapper = (PersonListWrapper) um.unmarshal(file);
+            persons.clear();
+            persons.addAll(wrapper.getPersons());
+
+            // Save current file path to preferences
+            this.savePersonsFilePath(file);
+        }
+        catch (JAXBException e) {
+            Alert fileError = new Alert(Alert.AlertType.ERROR);
+            fileError.setTitle("File error");
+            fileError.setHeaderText("An error occurs while processing file");
+            fileError.setContentText("Can not load data from: " + file.getAbsolutePath());
+
+            fileError.show();
+        }
+    }
+
+    public void savePersonsToXMLFile(File file) {
+        try {
+            JAXBContext context = JAXBContext.newInstance(PersonListWrapper.class);
+            Marshaller m = context.createMarshaller();
+
+            // Wrap out persons list
+            PersonListWrapper wrapper = new PersonListWrapper();
+            wrapper.setPersons(persons);
+
+            // Marshalling persons and saving to file
+            m.marshal(wrapper, file);
+
+            // Saving the file path to registry
+            this.savePersonsFilePath(file);
+        }
+        catch (JAXBException e) {
+            Alert fileError = new Alert(Alert.AlertType.ERROR);
+            fileError.setTitle("File error");
+            fileError.setHeaderText("An error occurs while processing file");
+            fileError.setContentText("Can not save data from: " + file.getAbsolutePath());
+
+            fileError.show();
+        }
+    }
+
+    public void showBirthdayStatistics() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("view/BirthdayStatistics.fxml"));
+            AnchorPane anchorPane =loader.load();
+
+            Stage statisticsStage = new Stage();
+            statisticsStage.setTitle("Birthday Statistics");
+            statisticsStage.initModality(Modality.WINDOW_MODAL);
+            statisticsStage.initOwner(primaryStage);
+
+            Scene scene = new Scene(anchorPane);
+            statisticsStage.setScene(scene);
+
+            BirthdayStatisticsController controller = loader.getController();
+            controller.setPersonData(persons);
+
+            statisticsStage.show();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

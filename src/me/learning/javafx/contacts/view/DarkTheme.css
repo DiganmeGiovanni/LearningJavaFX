@@ -79,7 +79,7 @@
 }
 
 .menu-bar .label {
-    -fx-font-size: 14pt;
+    -fx-font-size: 13pt;
     -fx-font-family: "Open Sans Light";
     -fx-text-fill: white;
     -fx-opacity: 0.9;
